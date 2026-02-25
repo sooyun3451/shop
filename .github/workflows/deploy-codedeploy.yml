@@ -25,7 +25,7 @@ jobs:
           echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./src/main/resources/application.yml
           ls -l ./src/main/resources
       - name: Gradle 실행 권한 부여
-        run: chmod +x ./market/gradlew
+        run: chmod +x ./gradlew
 
       - name: 테스트 및 빌드
         run: ./gradlew clean build -x test
@@ -39,14 +39,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Docker 이미지 빌드
-        run: docker build -t market-server:${{ github.sha }} ./market
+        run: docker build -t market-server:${{ github.sha }}
 
       - name: ECR 로그인
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Docker 이미지 생성
-        run: docker build -t market-server:${{ github.sha }} 
+        run: docker build -t market-server:${{ github.sha }}
 
       - name: Docker 태그 & 푸시
         run: |
