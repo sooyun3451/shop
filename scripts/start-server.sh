@@ -19,6 +19,6 @@ docker rm $REPO || true
 docker pull $IMAGE
 
 # 컨테이너 실행
-docker run -d --name $REPO -p 8080:8080 $IMAGE
+docker run -d --name $REPO -p 8081:8080 $IMAGE
 
 echo "--------------- 서버 배포 끝 -----------------"
